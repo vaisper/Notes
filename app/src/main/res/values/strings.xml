@@ -4,4 +4,6 @@
     <string name="note_title">Note Title</string>
     <string name="note_subtitle">Note Subtitle</string>
     <string name="type_note_here">Type note here ...</string>
+    <string name="add_note">add_Note</string>
+    <string name="back_to_all_notes">back to all notes</string>
 </resources>

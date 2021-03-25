@@ -33,6 +33,7 @@
         android:clipToPadding="false"
         app:layout_constraintBottom_toBottomOf="@id/imageAddNotes">
     </androidx.recyclerview.widget.RecyclerView>
+
     <ImageButton
         android:layout_width="@dimen/size_add_button"
         android:layout_height="50dp"
@@ -44,7 +45,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginEnd="30dp"
-        android:layout_marginBottom="30dp">
-
-    </ImageButton>
+        android:layout_marginBottom="30dp"
+        android:contentDescription="@string/add_note" />
     </androidx.constraintlayout.widget.ConstraintLayout>

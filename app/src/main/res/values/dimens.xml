@@ -4,6 +4,6 @@
     <dimen name="size_add_button">50dp</dimen>
     <dimen name="textSize_DataTime">12sp</dimen>
     <dimen name="padding_NoteTitle">10dp</dimen>
-    <dimen name="textSize_subTitle">16sp</dimen>
-    <dimen name="textSize_Title">20sp</dimen>
+    <dimen name="textSize_subTitle">22sp</dimen>
+    <dimen name="textSize_Title">30sp</dimen>
 </resources>

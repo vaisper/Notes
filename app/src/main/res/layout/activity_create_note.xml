@@ -9,6 +9,7 @@
 
     <ScrollView
         android:layout_width="match_parent"
+
         android:layout_height="match_parent"
         android:clipToPadding="false"
         tools:layout_editor_absoluteX="0dp"
@@ -22,21 +23,22 @@
                 android:id="@+id/back_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
+                android:layout_marginStart="25dp"
                 android:layout_marginTop="30dp"
                 android:background="@drawable/background_add_button"
                 android:padding="5dp"
                 android:src="@drawable/ic_back"
                 android:tint="@color/black"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                android:contentDescription="@string/back_to_all_notes" />
 
             <ImageButton
                 android:id="@+id/done_button"
-                android:layout_width="wrap_content"
+                android:layout_width="35dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
-                android:layout_marginEnd="10dp"
+                android:layout_marginEnd="25dp"
                 android:background="@drawable/background_add_button"
                 android:padding="5dp"
                 android:src="@drawable/ic_done"
@@ -53,8 +55,9 @@
                 android:hint="@string/note_title"
                 android:imeOptions="actionDone"
                 android:includeFontPadding="false"
-                android:paddingStart="@dimen/padding_NoteTitle"
+                android:paddingStart="25dp"
                 android:paddingTop="@dimen/padding_NoteTitle"
+                android:paddingEnd="25dp"
                 android:paddingBottom="5dp"
                 android:textColor="@color/white"
                 android:textColorHint="@color/colorTextHint"
@@ -66,34 +69,33 @@
                 android:id="@+id/text_DataTime"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:paddingStart="@dimen/padding_NoteTitle"
+
+                android:paddingStart="25dp"
+                android:paddingEnd="25dp"
                 android:text="10.20.2020"
                 android:textColor="@color/colorTextHint"
                 android:textSize="@dimen/textSize_DataTime"
-                app:layout_constraintEnd_toEndOf="@id/NoteTitle"
-                app:layout_constraintStart_toStartOf="@id/NoteTitle"
-                app:layout_constraintTop_toBottomOf="@id/NoteTitle" />
-
-            <EditText
-                android:id="@+id/Note_SubTitle"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:background="@null"
-                android:hint="@string/note_subtitle"
-                android:importantForAutofill="no"
-                android:includeFontPadding="false"
-                android:inputType="textImeMultiLine"
-                android:padding="@dimen/padding_NoteTitle"
-                android:paddingStart="@dimen/padding_NoteTitle"
-                android:paddingEnd="@dimen/padding_NoteTitle"
-                android:textColor="@color/colorTextSubtitle"
-                android:textColorHint="@color/colorTextHint"
-                android:textSize="@dimen/textSize_subTitle"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/NoteTitle" />
+
+            <View
+                android:id="@+id/view"
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="25dp"
+                android:layout_marginBottom="15dp"
+                android:background="@color/colorTextHint"
+                android:visibility="visible"
+                app:layout_constraintBottom_toTopOf="@id/NoteText"
                 app:layout_constraintTop_toBottomOf="@id/text_DataTime" />
 
+
+
             <EditText
+                android:id="@+id/NoteText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@null"
@@ -103,14 +105,14 @@
                 android:includeFontPadding="false"
                 android:inputType="textImeMultiLine"
                 android:minHeight="100dp"
-                android:paddingStart="@dimen/padding_NoteTitle"
+                android:paddingStart="25dp"
                 android:paddingTop="@dimen/padding_NoteTitle"
-                android:paddingEnd="@dimen/padding_NoteTitle"
+                android:paddingEnd="25dp"
                 android:textColor="@color/white"
                 android:textColorHint="@color/colorTextHint"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/Note_SubTitle">
+                app:layout_constraintTop_toBottomOf="@id/view">
 
             </EditText>
         </androidx.constraintlayout.widget.ConstraintLayout>
