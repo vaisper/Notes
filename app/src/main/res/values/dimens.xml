@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="margin_textMyNotes">12dp</dimen>
+    <dimen name="size_add_button">50dp</dimen>
+    <dimen name="textSize_DataTime">12sp</dimen>
+    <dimen name="padding_NoteTitle">10dp</dimen>
+    <dimen name="textSize_subTitle">16sp</dimen>
+    <dimen name="textSize_Title">20sp</dimen>
+</resources>
