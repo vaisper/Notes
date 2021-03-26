@@ -69,10 +69,8 @@
                 android:id="@+id/text_DataTime"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-
                 android:paddingStart="25dp"
                 android:paddingEnd="25dp"
-                android:text="10.20.2020"
                 android:textColor="@color/colorTextHint"
                 android:textSize="@dimen/textSize_DataTime"
                 app:layout_constraintEnd_toEndOf="parent"
