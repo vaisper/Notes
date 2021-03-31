@@ -1,11 +1,16 @@
 package com.example.notes.screens;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -24,6 +29,8 @@ public class CreateNoteActivity extends AppCompatActivity {
     private EditText inputNoteTitle, inputNoteText;
     private TextView textDataTime;
     private ImageButton imageBack, imageSave;
+    private Note alreadyAvailableNote;
+    private AlertDialog dialogDeleteNote;
 
 
     @Override
@@ -32,9 +39,15 @@ public class CreateNoteActivity extends AppCompatActivity {
         setContentView(R.layout.activity_create_note);
         init();
         clickBackButton();
-        textDataTime.setText(new SimpleDateFormat("EEEE, dd MMMM yyyy HH:mm a",Locale.getDefault())
+        textDataTime.setText(new SimpleDateFormat("EEEE, dd MMMM yyyy HH:mm a", Locale.getDefault())
                 .format(new Date()));
+
+        if (getIntent().getBooleanExtra("isViewOrUpdate", false)) {
+            alreadyAvailableNote = (Note) getIntent().getSerializableExtra("note");
+            setViewOrUpdateNote();
+        }
         clickSaveButton();
+        deleteNote();
 
     }
 
@@ -59,6 +72,64 @@ public class CreateNoteActivity extends AppCompatActivity {
         imageSave = findViewById(R.id.done_button);
     }
 
+    private void setViewOrUpdateNote() {
+        inputNoteTitle.setText(alreadyAvailableNote.getTitle());
+        inputNoteText.setText(alreadyAvailableNote.getNoteText());
+        textDataTime.setText(alreadyAvailableNote.getDateTime());
+    }
+
+    private void deleteNote() {
+        if (alreadyAvailableNote != null) {
+            findViewById(R.id.delete_button).setOnClickListener(v -> {
+                showDeleteNoteDialog();
+            });
+        }
+    }
+
+    private void showDeleteNoteDialog() {
+
+        if (dialogDeleteNote == null) {
+            AlertDialog.Builder bilder = new AlertDialog.Builder(CreateNoteActivity.this);
+            View view = LayoutInflater.from(this).inflate(
+                    R.layout.layout_delete_note,
+                    (ViewGroup) findViewById(R.id.layoutDeleteNoteContainer)
+            );
+            bilder.setView(view);
+            dialogDeleteNote = bilder.create();
+            if (dialogDeleteNote.getWindow() != null) {
+                dialogDeleteNote.getWindow().setBackgroundDrawable(new ColorDrawable(0));
+            }
+            view.findViewById(R.id.textDeleteNote);
+            view.setOnClickListener(v -> {
+                @SuppressLint("StaticFieldLeak")
+                class DeleteNoteTask extends AsyncTask<Void, Void, Void> {
+
+
+                    @Override
+                    protected Void doInBackground(Void... voids) {
+                        NotesDatabase.getDatabase(getApplicationContext()).noteDao()
+                                .deleteNote(alreadyAvailableNote);
+                        return null;
+                    }
+
+                    @Override
+                    protected void onPostExecute(Void aVoid) {
+                        super.onPostExecute(aVoid);
+                        Intent intent = new Intent();
+                        intent.putExtra("isNoteDeleted", true);
+                        setResult(RESULT_OK, intent);
+                        finish();
+                    }
+                }
+                new DeleteNoteTask().execute();
+            });
+            view.findViewById(R.id.textCancel).setOnClickListener(v -> {
+                dialogDeleteNote.dismiss();
+            });
+        }
+        dialogDeleteNote.show();
+    }
+
     private void saveNote() {
         if (inputNoteTitle.getText().toString().trim().isEmpty()) {
             Toast.makeText(this, "Note title can`t is empty", Toast.LENGTH_SHORT).show();
@@ -71,6 +142,11 @@ public class CreateNoteActivity extends AppCompatActivity {
         note.setNoteText(inputNoteText.getText().toString());
         note.setTitle(inputNoteTitle.getText().toString());
         note.setDateTime(textDataTime.getText().toString());
+
+
+        if (alreadyAvailableNote != null) {
+            note.setId(alreadyAvailableNote.getId());
+        }
 
         @SuppressLint("StaticalFieldLeak")
         class NoteSave extends AsyncTask<Void, Void, Void> {
